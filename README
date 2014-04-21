@@ -1,0 +1,7 @@
+This repo is for experimental unoffical packaging of cabal-install for Fedora:
+typically newer versions than current Haskell Platform and the Fedora package.
+
+The build is statically linked against Haskell libraries for portability.
+
+You can find some corresponding builds currently in
+<https://copr.fedoraproject.org/coprs/petersen/cabal-install>.
