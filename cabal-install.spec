@@ -4,7 +4,7 @@
 
 Name:           cabal-install
 Version:        1.20.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
@@ -56,6 +56,9 @@ installation of Haskell libraries and programs.
 
 
 %changelog
+* Wed May  7 2014 Jens Petersen <petersen@redhat.com> - 1.20.0.1-2
+- copr rebuild
+
 * Wed May  7 2014 Jens Petersen <petersen@redhat.com> - 1.20.0.1-1
 - update to 1.20.0.1
 
