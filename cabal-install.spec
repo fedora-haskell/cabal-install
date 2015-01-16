@@ -3,13 +3,14 @@
 %global ghc_without_dynamic 1
 
 Name:           cabal-install
-Version:        1.20.0.2
+Version:        1.20.0.4
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
 URL:            http://hackage.haskell.org/package/%{name}
 Source0:        http://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+Patch1:         cabal-install-1.20.0.4-network-uri.patch
 
 BuildRequires:  ghc-Cabal-devel > 1.20.0
 BuildRequires:  ghc-rpm-macros
@@ -39,6 +40,7 @@ installation of Haskell libraries and programs.
 
 %prep
 %setup -q
+%patch1 -p1 -b .orig
 
 
 %build
@@ -56,6 +58,9 @@ installation of Haskell libraries and programs.
 
 
 %changelog
+* Thu Dec 25 2014 Jens Petersen <petersen@redhat.com> - 1.20.0.4-1
+- update to 1.20.0.4
+
 * Thu Jun  5 2014 Jens Petersen <petersen@redhat.com> - 1.20.0.2-1
 - update to 1.20.0.2
 
