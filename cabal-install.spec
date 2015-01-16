@@ -10,6 +10,7 @@ Summary:        The command-line interface for Cabal and Hackage
 License:        BSD
 URL:            http://hackage.haskell.org/package/%{name}
 Source0:        http://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+Patch0:         cabal-install-1.18.0.8-HTTP-bootstrap.patch
 
 BuildRequires:  ghc-Cabal-devel
 #BuildRequires:  ghc-rpm-macros
@@ -22,6 +23,7 @@ BuildRequires:  ghc-directory-devel
 BuildRequires:  ghc-filepath-devel
 #BuildRequires:  ghc-mtl-devel
 #BuildRequires:  ghc-network-devel
+BuildRequires:  ghc-old-time-devel
 BuildRequires:  ghc-pretty-devel
 BuildRequires:  ghc-process-devel
 #BuildRequires:  ghc-random-devel
@@ -40,6 +42,7 @@ installation of Haskell libraries and programs.
 
 %prep
 %setup -q
+%patch0 -p1 -b .orig
 
 
 %build
