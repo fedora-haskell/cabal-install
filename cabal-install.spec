@@ -3,34 +3,35 @@
 %global ghc_without_dynamic 1
 
 Name:           cabal-install
-Version:        1.20.0.4
+Version:        1.22.0.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
 URL:            http://hackage.haskell.org/package/%{name}
 Source0:        http://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
-Patch1:         cabal-install-1.20.0.4-network-uri.patch
 
-BuildRequires:  ghc-Cabal-devel > 1.20.0
-BuildRequires:  ghc-rpm-macros
+BuildRequires:  ghc-Cabal-devel
+#BuildRequires:  ghc-rpm-macros
 # Begin cabal-rpm deps:
-BuildRequires:  ghc-HTTP-devel
+#BuildRequires:  ghc-HTTP-devel
 BuildRequires:  ghc-array-devel
 BuildRequires:  ghc-bytestring-devel
 BuildRequires:  ghc-containers-devel
 BuildRequires:  ghc-directory-devel
 BuildRequires:  ghc-filepath-devel
-BuildRequires:  ghc-mtl-devel
-BuildRequires:  ghc-network-devel
+#BuildRequires:  ghc-mtl-devel
+#BuildRequires:  ghc-network-devel
+BuildRequires:  ghc-old-time-devel
 BuildRequires:  ghc-pretty-devel
 BuildRequires:  ghc-process-devel
-BuildRequires:  ghc-random-devel
-BuildRequires:  ghc-stm-devel
+#BuildRequires:  ghc-random-devel
+#BuildRequires:  ghc-stm-devel
 BuildRequires:  ghc-time-devel
 BuildRequires:  ghc-unix-devel
-BuildRequires:  ghc-zlib-devel
+#BuildRequires:  ghc-zlib-devel
 # End cabal-rpm deps
+BuildRequires:  zlib-devel
 
 %description
 The 'cabal' command-line program simplifies the process of managing Haskell
@@ -40,24 +41,28 @@ installation of Haskell libraries and programs.
 
 %prep
 %setup -q
-%patch1 -p1 -b .orig
 
 
 %build
-%ghc_bin_build
+./bootstrap.sh
 
 
 %install
-%ghc_bin_install
+install -D dist/build/cabal/cabal %{buildroot}%{_bindir}/cabal
 
 
 %files
 %doc LICENSE
-%doc README
+%doc README.md
+%doc changelog
 %{_bindir}/cabal
 
 
 %changelog
+* Fri Jan 16 2015 Jens Petersen <petersen@redhat.com> - 1.22.0.0-1
+- update to 1.22.0.0
+- build with bootstrap.sh
+
 * Thu Dec 25 2014 Jens Petersen <petersen@redhat.com> - 1.20.0.4-1
 - update to 1.20.0.4
 
