@@ -44,6 +44,9 @@ installation of Haskell libraries and programs.
 
 
 %build
+# allow building with bootstrap ghc
+export EXTRA_CONFIGURE_OPTS=""
+export NO_DOCUMENTATION=1
 ./bootstrap.sh
 
 
