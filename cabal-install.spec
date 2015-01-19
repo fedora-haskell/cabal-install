@@ -1,19 +1,17 @@
 # https://fedoraproject.org/wiki/Packaging:Haskell
 
-%global ghc_without_dynamic 1
-
 Name:           cabal-install
 Version:        1.18.0.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
 URL:            http://hackage.haskell.org/package/%{name}
 Source0:        http://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source1:        cabal-install.sh
 Patch0:         cabal-install-1.18.0.8-HTTP-bootstrap.patch
 
 BuildRequires:  ghc-Cabal-devel
-#BuildRequires:  ghc-rpm-macros
 # Begin cabal-rpm deps:
 #BuildRequires:  ghc-HTTP-devel
 BuildRequires:  ghc-array-devel
@@ -33,11 +31,15 @@ BuildRequires:  ghc-unix-devel
 #BuildRequires:  ghc-zlib-devel
 # End cabal-rpm deps
 BuildRequires:  zlib-devel
+# for /etc/bash_completion.d/
+Requires:       filesystem
+# for /etc/profile.d/
+Requires:       setup
 
 %description
 The 'cabal' command-line program simplifies the process of managing Haskell
 software by automating the fetching, configuration, compilation and
-installation of Haskell libraries and programs.
+installation of Haskell libraries and programs from Hackage.
 
 
 %prep
@@ -52,14 +54,25 @@ installation of Haskell libraries and programs.
 %install
 install -D dist/build/cabal/cabal %{buildroot}%{_bindir}/cabal
 
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
+cp -p bash-completion/cabal $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
+
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+
 
 %files
 %doc LICENSE
 %doc README
 %{_bindir}/cabal
+%config(noreplace) %{_sysconfdir}/bash_completion.d/cabal
+%config(noreplace) %{_sysconfdir}/profile.d/cabal-install.sh
 
 
 %changelog
+* Mon Jan 19 2015 Jens Petersen <petersen@redhat.com> - 1.18.0.8-2
+- add bash_completion.d and profile.d files
+
 * Fri Jan 16 2015 Jens Petersen <petersen@redhat.com> - 1.18.0.8-1
 - update to 1.18.0.8
 - build with bootstrap.sh
