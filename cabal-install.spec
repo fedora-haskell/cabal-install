@@ -4,7 +4,7 @@
 
 Name:           cabal-install
 Version:        1.22.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
@@ -22,7 +22,7 @@ BuildRequires:  ghc-directory-devel
 BuildRequires:  ghc-filepath-devel
 #BuildRequires:  ghc-mtl-devel
 #BuildRequires:  ghc-network-devel
-BuildRequires:  ghc-old-time-devel
+#BuildRequires:  ghc-old-time-devel
 BuildRequires:  ghc-pretty-devel
 BuildRequires:  ghc-process-devel
 #BuildRequires:  ghc-random-devel
@@ -62,6 +62,9 @@ install -D dist/build/cabal/cabal %{buildroot}%{_bindir}/cabal
 
 
 %changelog
+* Mon Jan 19 2015 Jens Petersen <petersen@redhat.com> - 1.22.0.0-2
+- build with ghc-7.10 and without old-time dep
+
 * Fri Jan 16 2015 Jens Petersen <petersen@redhat.com> - 1.22.0.0-1
 - update to 1.22.0.0
 - build with bootstrap.sh
