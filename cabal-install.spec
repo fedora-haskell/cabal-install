@@ -1,15 +1,14 @@
 # https://fedoraproject.org/wiki/Packaging:Haskell
 
 Name:           cabal-install
-Version:        1.18.0.8
-Release:        2%{?dist}
+Version:        1.18.1.0
+Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
 URL:            http://hackage.haskell.org/package/%{name}
 Source0:        http://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:        cabal-install.sh
-Patch0:         cabal-install-1.18.0.8-HTTP-bootstrap.patch
 
 BuildRequires:  ghc-Cabal-devel
 # Begin cabal-rpm deps:
@@ -44,7 +43,6 @@ installation of Haskell libraries and programs from Hackage.
 
 %prep
 %setup -q
-%patch0 -p1 -b .orig
 
 
 %build
@@ -70,6 +68,9 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 
 %changelog
+* Fri Oct 23 2015 Jens Petersen <petersen@redhat.com> - 1.18.1.0-1
+- update to 1.18.1.0
+
 * Mon Jan 19 2015 Jens Petersen <petersen@redhat.com> - 1.18.0.8-2
 - add bash_completion.d and profile.d files
 
