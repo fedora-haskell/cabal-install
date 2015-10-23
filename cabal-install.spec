@@ -1,7 +1,7 @@
 # https://fedoraproject.org/wiki/Packaging:Haskell
 
 Name:           cabal-install
-Version:        1.22.4.0
+Version:        1.22.6.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -72,6 +72,9 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 
 %changelog
+* Mon Jul 13 2015 Jens Petersen <petersen@redhat.com> - 1.22.6.0-1
+- 1.22.6.0
+
 * Wed May 13 2015 Jens Petersen <petersen@redhat.com> - 1.22.4.0-1
 - 1.22.4.0
 
