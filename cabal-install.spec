@@ -2,7 +2,7 @@
 
 Name:           cabal-install
 Version:        1.22.7.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
@@ -34,6 +34,8 @@ BuildRequires:  zlib-devel
 Requires:       filesystem
 # for /etc/profile.d/
 Requires:       setup
+# use common from Fedora to avoid conflict
+Requires:       cabal-install-common
 
 %description
 The 'cabal' command-line program simplifies the process of managing Haskell
@@ -55,23 +57,18 @@ export NO_DOCUMENTATION=1
 %install
 install -D dist/build/cabal/cabal %{buildroot}%{_bindir}/cabal
 
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
-cp -p bash-completion/cabal $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
-
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-
 
 %files
 %doc LICENSE
 %doc README.md
 %doc changelog
 %{_bindir}/cabal
-%config(noreplace) %{_sysconfdir}/bash_completion.d/cabal
-%config(noreplace) %{_sysconfdir}/profile.d/cabal-install.sh
 
 
 %changelog
+* Tue Jan 12 2016 Jens Petersen <petersen@redhat.com> - 1.22.7.0-2
+- require Fedora cabal-install-common rather than conflicting with it
+
 * Fri Jan  8 2016 Jens Petersen <petersen@redhat.com> - 1.22.7.0-1
 - update to 1.22.7.0
 
