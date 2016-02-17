@@ -1,8 +1,8 @@
 # https://fedoraproject.org/wiki/Packaging:Haskell
 
 Name:           cabal-install
-Version:        1.22.7.0
-Release:        3%{?dist}
+Version:        1.22.8.0
+Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
@@ -83,6 +83,9 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 
 %changelog
+* Wed Feb 17 2016 Jens Petersen <petersen@redhat.com> - 1.22.8.0-1
+- update to 1.22.8.0
+
 * Tue Jan 19 2016 Jens Petersen <petersen@redhat.com> - 1.22.7.0-3
 - no cabal-install-common for epel
 
