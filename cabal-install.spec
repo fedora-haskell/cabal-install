@@ -1,7 +1,7 @@
 # https://fedoraproject.org/wiki/Packaging:Haskell
 
 Name:           cabal-install
-Version:        1.23.0.0
+Version:        1.24.0.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -84,6 +84,9 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 
 %changelog
+* Sun Apr 24 2016 Jens Petersen <petersen@redhat.com> - 1.24.0.0-1
+- update to candidate 1.24.0.0 for ghc-8.0.1 RC3+
+
 * Mon Feb 29 2016 Jens Petersen <petersen@redhat.com> - 1.23.0.0-1
 - update to candidate 1.23.0.0 for ghc8
 
