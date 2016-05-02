@@ -26,6 +26,7 @@ BuildRequires:  ghc-pretty-devel
 BuildRequires:  ghc-process-devel
 #BuildRequires:  ghc-random-devel
 #BuildRequires:  ghc-stm-devel
+BuildRequires:  ghc-template-haskell-devel
 BuildRequires:  ghc-time-devel
 BuildRequires:  ghc-unix-devel
 #BuildRequires:  ghc-zlib-devel
