@@ -1,7 +1,7 @@
 # https://fedoraproject.org/wiki/Packaging:Haskell
 
 Name:           cabal-install
-Version:        1.22.8.0
+Version:        1.22.9.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -26,6 +26,7 @@ BuildRequires:  ghc-process-devel
 #BuildRequires:  ghc-random-devel
 #BuildRequires:  ghc-stm-devel
 BuildRequires:  ghc-time-devel
+BuildRequires:  ghc-transformers-devel
 BuildRequires:  ghc-unix-devel
 #BuildRequires:  ghc-zlib-devel
 # End cabal-rpm deps
@@ -83,6 +84,9 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 
 %changelog
+* Mon Mar 28 2016 Jens Petersen <petersen@redhat.com> - 1.22.9.0-1
+- update to 1.22.9.0
+
 * Wed Feb 17 2016 Jens Petersen <petersen@redhat.com> - 1.22.8.0-1
 - update to 1.22.8.0
 
