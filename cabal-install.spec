@@ -85,8 +85,8 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 
 %changelog
-* Thu May  5 2016 Jens Petersen <petersen@redhat.com> - 1.24.0.0-1
-- update to 1.24.0.0 for ghc-8.0.1 RC3+
+* Wed Jul 20 2016 Jens Petersen <petersen@redhat.com> - 1.24.0.0-1
+- update to 1.24.0.0
 
 * Mon Feb 29 2016 Jens Petersen <petersen@redhat.com> - 1.23.0.0-1
 - update to candidate 1.23.0.0 for ghc8
