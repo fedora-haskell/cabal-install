@@ -1,5 +1,8 @@
 # https://fedoraproject.org/wiki/Packaging:Haskell
 
+# nothing to see here
+%global debug_package %{nil}
+
 Name:           cabal-install
 Version:        1.18.2.0
 Release:        1%{?dist}
