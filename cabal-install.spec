@@ -4,7 +4,7 @@
 %global debug_package %{nil}
 
 Name:           cabal-install
-Version:        1.24.0.1
+Version:        1.24.0.2
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -88,6 +88,9 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 
 %changelog
+* Fri Dec  9 2016 Jens Petersen <petersen@redhat.com> - 1.24.0.2-1
+- 1.24.0.2 release
+
 * Fri Nov 11 2016 Jens Petersen <petersen@redhat.com> - 1.24.0.1-1
 - update to 1.24.0.1
 
