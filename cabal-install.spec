@@ -21,8 +21,7 @@ BuildRequires:  ghc-bytestring-devel
 BuildRequires:  ghc-containers-devel
 BuildRequires:  ghc-directory-devel
 BuildRequires:  ghc-filepath-devel
-# temp for Hackage revision for ghc8
-BuildRequires:  ghc-mtl-devel
+#BuildRequires:  ghc-mtl-devel
 #BuildRequires:  ghc-network-devel
 #BuildRequires:  ghc-old-time-devel
 BuildRequires:  ghc-pretty-devel
