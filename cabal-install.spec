@@ -5,7 +5,7 @@
 
 Name:           cabal-install
 Version:        1.24.0.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
@@ -39,7 +39,7 @@ Requires:       filesystem
 # for /etc/profile.d/
 Requires:       setup
 # use common from Fedora to avoid conflict
-%if 0%{?fedora}
+%if 0%{?fedora} && %{fedora} < 26
 Requires:       cabal-install-common
 %endif
 
@@ -77,7 +77,7 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 %doc README.md
 %doc changelog
 %{_bindir}/cabal
-%if 0%{?fedora}
+%if 0%{?fedora} && %{fedora} < 26
 # we use the one in the Fedora common subpackage
 %doc bash-completion
 %else
@@ -87,6 +87,9 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 
 %changelog
+* Fri Feb 10 2017 Jens Petersen <petersen@fedoraproject.org> - 1.24.0.2-2
+- common subpackage gone in F26
+
 * Fri Dec  9 2016 Jens Petersen <petersen@redhat.com> - 1.24.0.2-1
 - 1.24.0.2 release
 
