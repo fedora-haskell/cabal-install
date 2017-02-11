@@ -9,8 +9,8 @@ Release:        2%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
-URL:            http://hackage.haskell.org/package/%{name}
-Source0:        http://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+Url:            https://hackage.haskell.org/package/%{name}
+Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:        cabal-install.sh
 
 BuildRequires:  ghc-Cabal-devel
@@ -38,10 +38,9 @@ BuildRequires:  zlib-devel
 Requires:       filesystem
 # for /etc/profile.d/
 Requires:       setup
-# use common from Fedora to avoid conflict
-%if 0%{?fedora} && %{fedora} < 26
-Requires:       cabal-install-common
-%endif
+# added for F26
+Obsoletes:      %{name}-common < %{version}-%{release}
+Obsoletes:      %{name}-static < %{version}-%{release}
 
 %description
 The 'cabal' command-line program simplifies the process of managing Haskell
@@ -63,13 +62,11 @@ export NO_DOCUMENTATION=1
 %install
 install -D dist/build/cabal/cabal %{buildroot}%{_bindir}/cabal
 
-%if 0%{?rhel}
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
 cp -p bash-completion/cabal $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-%endif
 
 
 %files
@@ -77,18 +74,13 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 %doc README.md
 %doc changelog
 %{_bindir}/cabal
-%if 0%{?fedora} && %{fedora} < 26
-# we use the one in the Fedora common subpackage
-%doc bash-completion
-%else
 %config(noreplace) %{_sysconfdir}/bash_completion.d/cabal
 %config(noreplace) %{_sysconfdir}/profile.d/cabal-install.sh
-%endif
 
 
 %changelog
 * Fri Feb 10 2017 Jens Petersen <petersen@fedoraproject.org> - 1.24.0.2-2
-- common subpackage gone in F26
+- obsolete common and static subpackages
 
 * Fri Dec  9 2016 Jens Petersen <petersen@redhat.com> - 1.24.0.2-1
 - 1.24.0.2 release
