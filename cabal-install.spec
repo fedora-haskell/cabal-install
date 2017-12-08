@@ -4,8 +4,8 @@
 %global debug_package %{nil}
 
 Name:           cabal-install
-Version:        1.24.0.2
-Release:        2%{?dist}
+Version:        2.0.0.1
+Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
@@ -13,22 +13,32 @@ Url:            https://hackage.haskell.org/package/%{name}
 Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:        cabal-install.sh
 
-BuildRequires:  ghc-Cabal-devel
+BuildRequires:  ghc-Cabal-devel > 2.0
+#BuildRequires:  ghc-rpm-macros
 # Begin cabal-rpm deps:
 #BuildRequires:  ghc-HTTP-devel
 BuildRequires:  ghc-array-devel
+#BuildRequires:  ghc-async-devel
+#BuildRequires:  ghc-base16-bytestring-devel
+BuildRequires:  ghc-binary-devel
 BuildRequires:  ghc-bytestring-devel
 BuildRequires:  ghc-containers-devel
+#BuildRequires:  ghc-cryptohash-sha256-devel
+#BuildRequires:  ghc-deepseq-devel
 BuildRequires:  ghc-directory-devel
+#BuildRequires:  ghc-echo-devel
+#BuildRequires:  ghc-edit-distance-devel
 BuildRequires:  ghc-filepath-devel
+#BuildRequires:  ghc-hackage-security-devel
+#BuildRequires:  ghc-hashable-devel
 #BuildRequires:  ghc-mtl-devel
 #BuildRequires:  ghc-network-devel
-#BuildRequires:  ghc-old-time-devel
+#BuildRequires:  ghc-network-uri-devel
 BuildRequires:  ghc-pretty-devel
 BuildRequires:  ghc-process-devel
 #BuildRequires:  ghc-random-devel
 #BuildRequires:  ghc-stm-devel
-BuildRequires:  ghc-template-haskell-devel
+#BuildRequires:  ghc-tar-devel
 BuildRequires:  ghc-time-devel
 BuildRequires:  ghc-unix-devel
 #BuildRequires:  ghc-zlib-devel
@@ -79,6 +89,9 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 
 
 %changelog
+* Fri Dec  8 2017 Jens Petersen <petersen@redhat.com> - 2.0.0.1-1
+- update to 2.0.0.1
+
 * Fri Feb 10 2017 Jens Petersen <petersen@fedoraproject.org> - 1.24.0.2-2
 - obsolete common and static subpackages
 
