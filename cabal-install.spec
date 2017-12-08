@@ -43,6 +43,8 @@ BuildRequires:  ghc-time-devel
 BuildRequires:  ghc-unix-devel
 #BuildRequires:  ghc-zlib-devel
 # End cabal-rpm deps
+# for hackage-security
+BuildRequires:  ghc-template-haskell-devel
 BuildRequires:  zlib-devel
 # for /etc/bash_completion.d/
 Requires:       filesystem
