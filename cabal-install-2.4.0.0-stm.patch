@@ -1,0 +1,11 @@
+--- cabal-install-2.4.0.0/bootstrap.sh~	1970-01-01 09:00:00.000000000 +0900
++++ cabal-install-2.4.0.0/bootstrap.sh	2018-09-23 23:49:59.394804832 +0900
+@@ -235,7 +235,7 @@
+                        # >= 1.1 && < 1.10
+ RANDOM_VER="1.1"       RANDOM_VER_REGEXP="1\.[01]\.?"
+                        # >= 1 && < 1.2
+-STM_VER="2.4.5.0";     STM_VER_REGEXP="2\."
++STM_VER="2.5.0.0";     STM_VER_REGEXP="2\."
+                        # == 2.*
+ HASHABLE_VER="1.2.7.0"; HASHABLE_VER_REGEXP="1\."
+                        # 1.*

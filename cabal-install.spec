@@ -13,6 +13,7 @@ License:        BSD
 Url:            https://hackage.haskell.org/package/%{name}
 Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:        cabal-install.sh
+Patch0:         cabal-install-2.4.0.0-stm.patch
 
 BuildRequires:  ghc-Cabal-devel > 2.4
 #BuildRequires:  ghc-rpm-macros
@@ -67,6 +68,7 @@ installation of Haskell libraries and programs.
 
 %prep
 %setup -q
+%patch0 -p1 -b .orig
 
 
 %build
