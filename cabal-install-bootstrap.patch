@@ -1,0 +1,20 @@
+--- cabal-install-2.4.1.0/bootstrap.sh.orig	1970-01-01 07:30:00.000000000 +0730
++++ cabal-install-2.4.1.0/bootstrap.sh	2019-11-05 15:09:41.902341949 +0800
+@@ -223,7 +223,7 @@
+                        # >= 2.0 && < 2.7
+ CABAL_VER="2.4.1.0";   CABAL_VER_REGEXP="2\.4\.[1-9]"
+                        # >= 2.4.1.0 && < 2.5
+-TRANS_VER="0.5.5.0";   TRANS_VER_REGEXP="0\.[45]\."
++TRANS_VER="0.5.5.2";   TRANS_VER_REGEXP="0\.[45]\."
+                        # >= 0.2.* && < 0.6
+ MTL_VER="2.2.2";       MTL_VER_REGEXP="[2]\."
+                        #  >= 2.0 && < 3
+@@ -235,7 +235,7 @@
+                        # >= 1.1 && < 1.10
+ RANDOM_VER="1.1"       RANDOM_VER_REGEXP="1\.[01]\.?"
+                        # >= 1 && < 1.2
+-STM_VER="2.4.5.0";     STM_VER_REGEXP="2\."
++STM_VER="2.5.0.0";     STM_VER_REGEXP="2\."
+                        # == 2.*
+ HASHABLE_VER="1.2.7.0"; HASHABLE_VER_REGEXP="1\."
+                        # 1.*

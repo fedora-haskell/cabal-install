@@ -18,7 +18,7 @@ Url:            https://hackage.haskell.org/package/%{name}
 Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 # End cabal-rpm sources
 Source1:        cabal-install.sh
-Patch0:         cabal-install-2.4.0.0-stm.patch
+Patch0:         cabal-install-bootstrap.patch
 
 BuildRequires:  ghc-Cabal-devel
 #BuildRequires:  ghc-rpm-macros
