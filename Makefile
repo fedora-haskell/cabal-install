@@ -1,4 +1,3 @@
-COPR_REPO = ghc-8.0.2
+COPR_REPO = cabal-install
 
 include ../common/common.mk
-
