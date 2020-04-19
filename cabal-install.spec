@@ -10,7 +10,7 @@
 %global debug_package %{nil}
 
 Name:           cabal-install
-Version:        3.0.0.0
+Version:        3.2.0.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -40,6 +40,7 @@ BuildRequires:  ghc-edit-distance-devel
 BuildRequires:  ghc-filepath-devel
 BuildRequires:  ghc-hackage-security-devel
 BuildRequires:  ghc-hashable-devel
+#BuildRequires:  ghc-lukko-devel
 BuildRequires:  ghc-mtl-devel
 BuildRequires:  ghc-network-devel
 BuildRequires:  ghc-network-uri-devel
@@ -52,6 +53,7 @@ BuildRequires:  ghc-stm-devel
 BuildRequires:  ghc-tar-devel
 BuildRequires:  ghc-text-devel
 BuildRequires:  ghc-time-devel
+BuildRequires:  ghc-transformers-devel
 BuildRequires:  ghc-unix-devel
 BuildRequires:  ghc-zlib-devel
 BuildRequires:  cabal-install > 1.18
@@ -81,18 +83,15 @@ installation of Haskell libraries and programs.
 %build
 # Begin cabal-rpm build:
 %global cabal cabal
-%cabal update
-%cabal sandbox init
-%cabal install --only-dependencies
-%ghc_bin_build
+cabal v2-update
+cabal v2-build
 # End cabal-rpm build
 
 
 %install
 # Begin cabal-rpm install
-%ghc_bin_install
 # End cabal-rpm install
-#install -D dist/build/cabal/cabal %{buildroot}%{_bindir}/cabal
+install -D dist-newstyle/build/*/ghc-%{ghc_version}/cabal-install-%{version}/build/cabal/cabal %{buildroot}%{_bindir}/cabal
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
 cp -p bash-completion/cabal $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
@@ -109,10 +108,12 @@ install -pm 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 # End cabal-rpm files
 %config(noreplace) %{_sysconfdir}/bash_completion.d/cabal
 %config(noreplace) %{_sysconfdir}/profile.d/cabal-install.sh
-%{_mandir}/man1/cabal.1*
 
 
 %changelog
+* Tue Apr 14 2020 Jens Petersen <petersen@redhat.com> - 3.2.0.0-1
+- update to 3.2.0.0
+
 * Tue Mar  3 2020 Jens Petersen <petersen@redhat.com> - 3.0.0.0-1
 - update to 3.0.0.0
 
