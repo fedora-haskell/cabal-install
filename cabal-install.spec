@@ -20,6 +20,8 @@ Url:            https://hackage.haskell.org/package/%{name}
 Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 # End cabal-rpm sources
 Source1:        cabal-install.sh
+# backport fix from https://github.com/haskell/cabal/issues/5813
+Patch0:         https://github.com/haskell/cabal/commit/442869918260a7bb3f0cb0698eaeaeb6dae2c4f6.patch
 
 # Begin cabal-rpm deps:
 BuildRequires:  ghc-rpm-macros
@@ -85,6 +87,7 @@ installation of Haskell libraries and programs.
 # Begin cabal-rpm setup:
 %setup -q
 # End cabal-rpm setup
+%patch0 -p2 -b .sdist
 
 
 %build
