@@ -25,34 +25,47 @@ Patch0:         https://github.com/haskell/cabal/commit/442869918260a7bb3f0cb069
 
 # Begin cabal-rpm deps:
 BuildRequires:  ghc-rpm-macros
+%if 0%{?fedora} || 0%{?rhel} == 7
 BuildRequires:  ghc-Cabal-devel
 BuildRequires:  ghc-HTTP-devel
 BuildRequires:  ghc-array-devel
 BuildRequires:  ghc-async-devel
 BuildRequires:  ghc-base-devel
+%if 0%{?fedora}
 BuildRequires:  ghc-base16-bytestring-devel
+%endif
 BuildRequires:  ghc-binary-devel
 BuildRequires:  ghc-bytestring-devel
 BuildRequires:  ghc-containers-devel
+%if 0%{?fedora}
 BuildRequires:  ghc-cryptohash-sha256-devel
+%endif
 BuildRequires:  ghc-deepseq-devel
 BuildRequires:  ghc-directory-devel
+%if 0%{?fedora}
 BuildRequires:  ghc-echo-devel
+%endif
 BuildRequires:  ghc-edit-distance-devel
 BuildRequires:  ghc-filepath-devel
+%if 0%{?fedora}
 BuildRequires:  ghc-hackage-security-devel
+%endif
 BuildRequires:  ghc-hashable-devel
 %if 0%{?fedora}
 BuildRequires:  ghc-lukko-devel
 %endif
 BuildRequires:  ghc-mtl-devel
 BuildRequires:  ghc-network-devel
+%if 0%{?fedora}
 BuildRequires:  ghc-network-uri-devel
+%endif
 BuildRequires:  ghc-parsec-devel
 BuildRequires:  ghc-pretty-devel
 BuildRequires:  ghc-process-devel
 BuildRequires:  ghc-random-devel
+%if 0%{?fedora}
 BuildRequires:  ghc-resolv-devel
+%endif
 BuildRequires:  ghc-stm-devel
 BuildRequires:  ghc-tar-devel
 BuildRequires:  ghc-text-devel
@@ -60,6 +73,10 @@ BuildRequires:  ghc-time-devel
 BuildRequires:  ghc-transformers-devel
 BuildRequires:  ghc-unix-devel
 BuildRequires:  ghc-zlib-devel
+%else
+BuildRequires:  ghc-devel
+BuildRequires:  zlib-devel
+%endif
 BuildRequires:  cabal-install > 1.18
 # End cabal-rpm deps
 ## for hackage-security
@@ -74,8 +91,10 @@ Requires:       filesystem
 Requires:       bind-utils
 # for /etc/profile.d/
 Requires:       setup
+%if 0%{?fedora} || 0%{?rhel} >= 8
 Recommends:     ghc-devel
 Recommends:     zlib-devel
+%endif
 
 %description
 The 'cabal' command-line program simplifies the process of managing Haskell
