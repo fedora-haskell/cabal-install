@@ -10,8 +10,8 @@
 %global debug_package %{nil}
 
 Name:           cabal-install
-Version:        3.2.0.0
-Release:        2%{?dist}
+Version:        3.4.0.0
+Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
@@ -20,8 +20,6 @@ Url:            https://hackage.haskell.org/package/%{name}
 Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 # End cabal-rpm sources
 Source1:        cabal-install.sh
-# backport fix from https://github.com/haskell/cabal/issues/5813
-Patch0:         https://github.com/haskell/cabal/commit/442869918260a7bb3f0cb0698eaeaeb6dae2c4f6.patch
 
 # Begin cabal-rpm deps:
 BuildRequires:  ghc-rpm-macros
@@ -106,7 +104,6 @@ installation of Haskell libraries and programs.
 # Begin cabal-rpm setup:
 %setup -q
 # End cabal-rpm setup
-%patch0 -p2 -b .sdist
 
 
 %build
@@ -120,7 +117,7 @@ cabal v2-build
 %install
 # Begin cabal-rpm install
 # End cabal-rpm install
-install -D dist-newstyle/build/*/ghc-%{ghc_version}/cabal-install-%{version}/build/cabal/cabal %{buildroot}%{_bindir}/cabal
+install -D dist-newstyle/build/*/ghc-%{ghc_version}/cabal-install-%{version}/x/cabal/build/cabal/cabal %{buildroot}%{_bindir}/cabal
 
 install -pm 644 -D -t %{buildroot}%{_datadir}/bash-completion/completions/ bash-completion/cabal
 
@@ -138,6 +135,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE1}
 
 
 %changelog
+* Wed Dec  1 2021 Jens Petersen <petersen@redhat.com> - 3.4.0.0-1
+- https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.4.0.0.md
+
 * Thu Sep 23 2021 Jens Petersen <petersen@redhat.com> - 3.2.0.0-2
 - sync with Fedora package
 
