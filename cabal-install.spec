@@ -10,7 +10,7 @@
 %global debug_package %{nil}
 
 Name:           cabal-install
-Version:        3.4.0.0
+Version:        3.4.1.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -135,6 +135,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE1}
 
 
 %changelog
+* Wed Dec  1 2021 Jens Petersen <petersen@redhat.com> - 3.4.1.0-1
+- 3.4.1.0 bugfix release
+
 * Wed Dec  1 2021 Jens Petersen <petersen@redhat.com> - 3.4.0.0-1
 - https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.4.0.0.md
 
