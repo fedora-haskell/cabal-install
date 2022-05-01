@@ -12,8 +12,8 @@
 %global debug_package %{nil}
 
 Name:           cabal-install
-Version:        3.4.1.0
-Release:        2%{?dist}
+Version:        3.6.2.0
+Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD
@@ -114,6 +114,8 @@ installation of Haskell libraries and programs.
 %setup -q
 dos2unix -k -n %{SOURCE1} %{name}.cabal
 # End cabal-rpm setup
+cabal-tweak-dep-ver base '< 4.15' '< 5'
+cabal-tweak-dep-ver time '< 1.11' '< 1.12'
 
 
 %build
@@ -150,6 +152,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 
 %changelog
+* Sun May  1 2022 Jens Petersen <petersen@redhat.com> - 3.6.2.0-1
+- https://github.com/haskell/cabal/tree/master/release-notes
+
 * Sun May  1 2022 Jens Petersen <petersen@redhat.com> - 3.4.1.0-2
 - replace ghc-compiler requires with recommends ghc or ghcX.Y
 - build with ghc9.0
