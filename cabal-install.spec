@@ -28,7 +28,7 @@ Source2:        cabal-install.sh
 BuildRequires:  dos2unix
 BuildRequires:  ghc-rpm-macros
 %if %{with ghc9}
-BuildRequires:  ghc9.0-devel
+BuildRequires:  ghc9.2-devel
 BuildRequires:  zlib-devel
 %else
 %if 0%{?fedora} || 0%{?rhel} == 7
@@ -128,7 +128,10 @@ cabal update
 # Begin cabal-rpm install
 mkdir -p %{buildroot}%{_bindir}
 %if 0%{?fedora} >= 33 || 0%{?rhel} > 8
-cabal install -w ghc-9.0.2 --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
+%if 0%{?fedora} >= 36
+%ghc_set_gcc_flags
+%endif
+cabal install -w ghc-9.2.2 --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
 %else
 for i in .cabal-sandbox/bin/*; do
 strip -s -o %{buildroot}%{_bindir}/$(basename $i) $i
@@ -154,6 +157,7 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 %changelog
 * Sun May  1 2022 Jens Petersen <petersen@redhat.com> - 3.6.2.0-1
 - https://github.com/haskell/cabal/tree/master/release-notes
+- build with ghc9.2
 
 * Sun May  1 2022 Jens Petersen <petersen@redhat.com> - 3.4.1.0-2
 - replace ghc-compiler requires with recommends ghc or ghcX.Y
