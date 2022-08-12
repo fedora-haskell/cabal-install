@@ -12,7 +12,7 @@
 %global debug_package %{nil}
 
 Name:           cabal-install
-Version:        3.6.2.0
+Version:        3.8.1.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -20,7 +20,6 @@ License:        BSD
 Url:            https://hackage.haskell.org/package/%{name}
 # Begin cabal-rpm sources:
 Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
-Source1:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}.cabal#/%{name}-%{version}.cabal
 # End cabal-rpm sources
 Source2:        cabal-install.sh
 
@@ -28,7 +27,7 @@ Source2:        cabal-install.sh
 BuildRequires:  dos2unix
 BuildRequires:  ghc-rpm-macros
 %if %{with ghc9}
-BuildRequires:  ghc9.2-devel
+BuildRequires:  ghc9.4-devel
 BuildRequires:  zlib-devel
 %else
 %if 0%{?fedora} || 0%{?rhel} == 7
@@ -112,10 +111,9 @@ installation of Haskell libraries and programs.
 %prep
 # Begin cabal-rpm setup:
 %setup -q
-dos2unix -k -n %{SOURCE1} %{name}.cabal
 # End cabal-rpm setup
-cabal-tweak-dep-ver base '< 4.15' '< 5'
-cabal-tweak-dep-ver time '< 1.11' '< 1.12'
+cabal-tweak-dep-ver base '<4.17' '< 4.18'
+#cabal-tweak-dep-ver time '< 1.11' '< 1.12'
 
 
 %build
@@ -131,7 +129,7 @@ mkdir -p %{buildroot}%{_bindir}
 %if 0%{?fedora} >= 36
 %ghc_set_gcc_flags
 %endif
-cabal install -w ghc-9.2.2 --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
+cabal install -w ghc-9.4 --allow-newer --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
 %else
 for i in .cabal-sandbox/bin/*; do
 strip -s -o %{buildroot}%{_bindir}/$(basename $i) $i
@@ -155,6 +153,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 
 %changelog
+* Fri Aug 12 2022 Jens Petersen <petersen@redhat.com> - 3.8.1.0-1
+- https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.8.1.0.md
+
 * Sun May  1 2022 Jens Petersen <petersen@redhat.com> - 3.6.2.0-1
 - https://github.com/haskell/cabal/tree/master/release-notes
 - build with ghc9.2
