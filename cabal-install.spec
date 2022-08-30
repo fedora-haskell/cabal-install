@@ -131,7 +131,7 @@ mkdir -p %{buildroot}%{_bindir}
 %if 0%{?fedora} >= 36
 %ghc_set_gcc_flags
 %endif
-cabal install -w ghc-9.2.2 --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
+cabal install -w ghc-9.2 --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
 %else
 for i in .cabal-sandbox/bin/*; do
 strip -s -o %{buildroot}%{_bindir}/$(basename $i) $i
