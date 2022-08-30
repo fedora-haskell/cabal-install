@@ -96,7 +96,7 @@ Requires:       bind-utils
 # for /etc/profile.d/
 Requires:       setup
 %if 0%{?fedora}
-Recommends:     (ghc or ghc8.10 or ghc9.0 or ghc9.2)
+Recommends:     (ghc or ghc8.10 or ghc9.0 or ghc9.2 or ghc9.4)
 %else
 Recommends:     ghc
 %endif
