@@ -1,0 +1,10 @@
+--- cabal-install-3.6.2.0/cabal-install.cabal~	2022-08-30 13:30:32.939053040 +0800
++++ cabal-install-3.6.2.0/cabal-install.cabal	2022-10-31 12:47:37.278575995 +0800
+@@ -272,6 +272,7 @@
+         binary     >= 0.7.3    && < 0.9,
+         bytestring >= 0.10.6.0 && < 0.12,
+         Cabal      >= 3.6.1.0  && < 3.7,
++        Cabal-syntax < 3.8,
+         containers >= 0.5.6.2  && < 0.7,
+         cryptohash-sha256 >= 0.11 && < 0.12,
+         deepseq    >= 1.4.1.1  && < 1.5,

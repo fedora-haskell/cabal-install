@@ -23,6 +23,7 @@ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%
 Source1:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}.cabal#/%{name}-%{version}.cabal
 # End cabal-rpm sources
 Source2:        cabal-install.sh
+Patch0:         cabal-install-3.6.2.0-Cabal-syntax.patch
 
 # Begin cabal-rpm deps:
 BuildRequires:  dos2unix
@@ -114,6 +115,7 @@ installation of Haskell libraries and programs.
 %setup -q
 dos2unix -k -n %{SOURCE1} %{name}.cabal
 # End cabal-rpm setup
+%patch0 -p1 -b .orig
 cabal-tweak-dep-ver base '< 4.15' '< 5'
 cabal-tweak-dep-ver time '< 1.11' '< 1.12'
 
