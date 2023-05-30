@@ -4,8 +4,10 @@
 %global pkg_name cabal-install
 %global pkgver %{pkg_name}-%{version}
 
-%global ghc_name ghc9.4
-%bcond_without compiler_default
+%global ghc_name ghc9.6
+%bcond_with compiler_default
+
+%bcond_without revision
 
 %global ghc_without_dynamic 1
 %global ghc_without_shared 1
@@ -16,7 +18,7 @@
 %global debug_package %{nil}
 
 Name:           %{pkg_name}
-Version:        3.8.1.0
+Version:        3.10.1.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -24,12 +26,16 @@ License:        BSD-3-Clause
 Url:            https://hackage.haskell.org/package/%{name}
 # Begin cabal-rpm sources:
 Source0:        https://hackage.haskell.org/package/%{pkgver}/%{pkgver}.tar.gz
+%if %{with revision}
 Source1:        https://hackage.haskell.org/package/%{pkgver}/%{name}.cabal#/%{pkgver}.cabal
+%endif
 # End cabal-rpm sources
 Source2:        cabal-install.sh
 
 # Begin cabal-rpm deps:
+%if %{with revision}
 BuildRequires:  dos2unix
+%endif
 BuildRequires:  ghc-rpm-macros
 %if %{defined ghc_name}
 BuildRequires:  %{ghc_name}-devel
@@ -119,13 +125,15 @@ installation of Haskell libraries and programs.
 %prep
 # Begin cabal-rpm setup:
 %setup -q
+%if %{with revision}
 dos2unix -k -n %{SOURCE1} %{name}.cabal
+%endif
 # End cabal-rpm setup
 
 
 %build
 # Begin cabal-rpm build:
-cabal update
+cabal update %{!?_with_compiler_default:-w ghc-%{ghc_version}}
 # End cabal-rpm build
 
 
