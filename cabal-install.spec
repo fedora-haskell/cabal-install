@@ -168,6 +168,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 
 %changelog
+* Tue May 30 2023 Jens Petersen <petersen@redhat.com> - 3.10.1.0-1
+- https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.10.1.0.md
+
 * Fri Aug 12 2022 Jens Petersen <petersen@redhat.com> - 3.8.1.0-1
 - https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.8.1.0.md
 
