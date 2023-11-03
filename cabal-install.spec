@@ -34,8 +34,9 @@ Source1:        https://hackage.haskell.org/package/%{pkgver}/%{name}.cabal#/%{p
 # End cabal-rpm sources
 Source2:        cabal-install.sh
 Source3:        https://hackage.haskell.org/package/%{cabalinstallsolver}/%{cabalinstallsolver}.tar.gz
-# https://github.com/haskell/cabal/pull/9134
-Patch0:         https://github.com/haskell/cabal/commit/3afd3a3920b999f795ec73e6c9a9740b1eff132b.patch
+# correct https://github.com/haskell/cabal/pull/9134
+Patch0:         cabal-install-solver-pkgconf-fixup.patch
+
 # Begin cabal-rpm deps:
 %if %{with revision}
 BuildRequires:  dos2unix
@@ -135,7 +136,7 @@ dos2unix -k -n %{SOURCE1} %{name}.cabal
 (
 cd %{cabalinstallsolver}
 cabal-tweak-dep-ver base '<4.18' '<4.19'
-%patch -P0 -p2 -b .orig
+%patch -P0 -p1 -b .orig
 )
 cat > cabal.project << EOF
 packages: .
@@ -179,7 +180,7 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 %changelog
 * Fri Nov  3 2023 Jens Petersen <petersen@redhat.com> - 3.10.1.0-2
-- add pkgconf fix from https://github.com/haskell/cabal/pull/9134
+- workaround pkgconf-1.9 --modversion regression breaking pkgconfig-depends
 
 * Tue May 30 2023 Jens Petersen <petersen@redhat.com> - 3.10.1.0-1
 - https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.10.1.0.md
