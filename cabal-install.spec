@@ -136,7 +136,10 @@ dos2unix -k -n %{SOURCE1} %{name}.cabal
 (
 cd %{cabalinstallsolver}
 cabal-tweak-dep-ver base '<4.18' '<4.19'
+%global pkgconf_version %(pkgconf --version)
+%if v"%pkgconf_version" > v"1.9" && v"%pkgconf_version" < v"2.0"
 %patch -P0 -p1 -b .orig
+%endif
 )
 cat > cabal.project << EOF
 packages: .
