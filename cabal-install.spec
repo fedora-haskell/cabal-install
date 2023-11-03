@@ -17,9 +17,11 @@
 %global without_haddock 1
 %global debug_package %{nil}
 
+%global cabalinstallsolver cabal-install-solver-3.10.1.0
+
 Name:           %{pkg_name}
 Version:        3.10.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD-3-Clause
@@ -31,7 +33,9 @@ Source1:        https://hackage.haskell.org/package/%{pkgver}/%{name}.cabal#/%{p
 %endif
 # End cabal-rpm sources
 Source2:        cabal-install.sh
-
+Source3:        https://hackage.haskell.org/package/%{cabalinstallsolver}/%{cabalinstallsolver}.tar.gz
+# https://github.com/haskell/cabal/pull/9134
+Patch0:         https://github.com/haskell/cabal/commit/3afd3a3920b999f795ec73e6c9a9740b1eff132b.patch
 # Begin cabal-rpm deps:
 %if %{with revision}
 BuildRequires:  dos2unix
@@ -124,11 +128,20 @@ installation of Haskell libraries and programs.
 
 %prep
 # Begin cabal-rpm setup:
-%setup -q
+%setup -q -a3
 %if %{with revision}
 dos2unix -k -n %{SOURCE1} %{name}.cabal
 %endif
 # End cabal-rpm setup
+(
+cd %{cabalinstallsolver}
+cabal-tweak-dep-ver base '<4.18' '<4.19'
+%patch -P0 -p2 -b .orig
+)
+cat > cabal.project << EOF
+packages: .
+packages: %{cabalinstallsolver}/
+EOF
 
 
 %build
@@ -168,6 +181,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 
 %changelog
+* Fri Nov  3 2023 Jens Petersen <petersen@redhat.com> - 3.10.1.0-2
+- add pkgconf fix from https://github.com/haskell/cabal/pull/9134
+
 * Tue May 30 2023 Jens Petersen <petersen@redhat.com> - 3.10.1.0-1
 - https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.10.1.0.md
 
