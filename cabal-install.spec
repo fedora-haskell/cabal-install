@@ -4,7 +4,8 @@
 %global pkg_name cabal-install
 %global pkgver %{pkg_name}-%{version}
 
-%global ghc_name ghc9.6
+%global ghc_major 9.6
+%global ghc_name ghc%{ghc_major}
 %bcond_with compiler_default
 
 %bcond_without revision
@@ -149,7 +150,7 @@ EOF
 
 %build
 # Begin cabal-rpm build:
-cabal update %{!?_with_compiler_default:-w ghc-%{ghc_version}}
+cabal update %{!?_with_compiler_default:-w ghc-%{ghc_major}}
 # End cabal-rpm build
 
 
@@ -158,7 +159,7 @@ cabal update %{!?_with_compiler_default:-w ghc-%{ghc_version}}
 mkdir -p %{buildroot}%{_bindir}
 %if 0%{?fedora} || 0%{?rhel} >= 9
 %ghc_set_gcc_flags
-cabal install %{!?_with_compiler_default:-w ghc-%{ghc_version}} --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
+cabal install %{!?_with_compiler_default:-w ghc-%{ghc_major}} --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
 %else
 for i in .cabal-sandbox/bin/*; do
 strip -s -o %{buildroot}%{_bindir}/$(basename $i) $i
