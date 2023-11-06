@@ -21,8 +21,8 @@
 %global cabalinstallsolver cabal-install-solver-3.10.1.0
 
 Name:           %{pkg_name}
-Version:        3.10.1.0
-Release:        2%{?dist}
+Version:        3.10.2.0
+Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD-3-Clause
@@ -183,6 +183,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 
 %changelog
+* Mon Nov  6 2023 Jens Petersen <petersen@redhat.com> - 3.10.2.0-1
+- https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.10.2.0.md
+
 * Fri Nov  3 2023 Jens Petersen <petersen@redhat.com> - 3.10.1.0-2
 - workaround pkgconf-1.9 --modversion regression breaking pkgconfig-depends
 
