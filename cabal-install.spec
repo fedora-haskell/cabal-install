@@ -20,11 +20,9 @@
 %global without_haddock 1
 %global debug_package %{nil}
 
-%global cabalinstallsolver cabal-install-solver-3.10.1.0
-
 Name:           %{pkg_name}
 Version:        3.10.3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
 License:        BSD-3-Clause
@@ -36,9 +34,6 @@ Source1:        https://hackage.haskell.org/package/%{pkgver}/%{name}.cabal#/%{p
 %endif
 # End cabal-rpm sources
 Source2:        cabal-install.sh
-Source3:        https://hackage.haskell.org/package/%{cabalinstallsolver}/%{cabalinstallsolver}.tar.gz
-# correct https://github.com/haskell/cabal/pull/9134
-Patch0:         cabal-install-solver-pkgconf-fixup.patch
 
 # Begin cabal-rpm deps:
 %if %{with revision}
@@ -126,26 +121,11 @@ installation of Haskell libraries and programs.
 
 %prep
 # Begin cabal-rpm setup:
-%setup -q -a3
+%setup -q
 %if %{with revision}
 dos2unix -k -n %{SOURCE1} %{name}.cabal
 %endif
 # End cabal-rpm setup
-(
-cd %{cabalinstallsolver}
-cabal-tweak-dep-ver base '<4.18' '<4.19'
-%global pkgconf_version %(pkgconf --version)
-%if %{defined fedora} || 0%{?rhel} >= 10
-# parsing fails on epel9
-%if v"%pkgconf_version" > v"1.9" && v"%pkgconf_version" < v"2.0"
-%patch -P0 -p1 -b .orig
-%endif
-%endif
-)
-cat > cabal.project << EOF
-packages: .
-packages: %{cabalinstallsolver}/
-EOF
 
 
 %build
@@ -183,6 +163,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 
 %changelog
+* Fri Dec 20 2024 Jens Petersen <petersen@redhat.com> - 3.10.3.0-2
+- build with cabal-install-solver-3.10.3.0
+
 * Fri Dec 20 2024 Jens Petersen <petersen@redhat.com> - 3.10.3.0-1
 - https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.10.3.0.md
 
