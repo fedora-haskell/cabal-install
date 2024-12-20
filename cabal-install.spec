@@ -12,7 +12,7 @@
 %global pkg_name cabal-install
 %global pkgver %{pkg_name}-%{version}
 
-%if 0%{?fedora} < 40
+%if 0%{?fedora} < 41
 %global ghc_major 9.6
 %global ghc_name ghc%{ghc_major}
 %endif
@@ -21,7 +21,7 @@
 %bcond_with revision
 
 Name:           %{pkg_name}
-Version:        3.12.1.0
+Version:        3.14.1.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -146,6 +146,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 
 %changelog
+* Fri Dec 20 2024 Jens Petersen <petersen@redhat.com> - 3.14.1.0-1
+- https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.14.1.0.md
+
 * Fri Dec 20 2024 Jens Petersen <petersen@redhat.com> - 3.12.1.0-1
 - https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.12.1.0.md
 
