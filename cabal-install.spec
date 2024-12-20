@@ -4,11 +4,13 @@
 %global pkg_name cabal-install
 %global pkgver %{pkg_name}-%{version}
 
+%if 0%{?fedora} < 41
 %global ghc_major 9.6
 %global ghc_name ghc%{ghc_major}
+%endif
 %bcond_with compiler_default
 
-%bcond_without revision
+%bcond_with revision
 
 %global ghc_without_dynamic 1
 %global ghc_without_shared 1
@@ -21,7 +23,7 @@
 %global cabalinstallsolver cabal-install-solver-3.10.1.0
 
 Name:           %{pkg_name}
-Version:        3.10.2.0
+Version:        3.10.3.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -50,7 +52,6 @@ BuildRequires:  %{ghc_name}-compiler-default
 %endif
 BuildRequires:  zlib-devel
 %else
-%if 0%{?fedora} || 0%{?rhel} == 7
 BuildRequires:  ghc-Cabal-devel
 BuildRequires:  ghc-Cabal-syntax-devel
 BuildRequires:  ghc-HTTP-devel
@@ -101,10 +102,6 @@ BuildRequires:  ghc-text-devel
 BuildRequires:  ghc-time-devel
 BuildRequires:  ghc-unix-devel
 BuildRequires:  ghc-zlib-devel
-%else
-BuildRequires:  ghc-devel
-BuildRequires:  zlib-devel
-%endif
 %endif
 BuildRequires:  cabal-install > 1.18
 # End cabal-rpm deps
@@ -153,7 +150,7 @@ EOF
 
 %build
 # Begin cabal-rpm build:
-cabal update %{!?with_compiler_default:-w ghc-%{ghc_major}}
+cabal update %{?ghc_major:%{!?with_compiler_default:-w ghc-%{ghc_major}}}
 # End cabal-rpm build
 
 
@@ -162,7 +159,7 @@ cabal update %{!?with_compiler_default:-w ghc-%{ghc_major}}
 mkdir -p %{buildroot}%{_bindir}
 %if 0%{?fedora} || 0%{?rhel} >= 9
 %ghc_set_gcc_flags
-cabal install %{!?with_compiler_default:-w ghc-%{ghc_major}} --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
+cabal install %{?ghc_major:%{!?with_compiler_default:-w ghc-%{ghc_major}}} --install-method=copy --enable-executable-stripping --installdir=%{buildroot}%{_bindir}
 %else
 for i in .cabal-sandbox/bin/*; do
 strip -s -o %{buildroot}%{_bindir}/$(basename $i) $i
@@ -186,6 +183,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 
 %changelog
+* Fri Dec 20 2024 Jens Petersen <petersen@redhat.com> - 3.10.3.0-1
+- https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.10.3.0.md
+
 * Mon Nov  6 2023 Jens Petersen <petersen@redhat.com> - 3.10.2.0-1
 - https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.10.2.0.md
 
