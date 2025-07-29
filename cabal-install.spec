@@ -21,7 +21,7 @@
 %bcond revision 1
 
 Name:           cabal-install
-Version:        3.14.2.0
+Version:        3.16.0.0
 Release:        1%{?dist}
 Summary:        The command-line interface for Cabal and Hackage
 
@@ -141,7 +141,7 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 %files
 # Begin cabal-rpm files:
 %license LICENSE
-%doc README.md changelog
+%doc README.md ChangeLog.md
 %{_bindir}/cabal
 # End cabal-rpm files
 %config(noreplace) %{_sysconfdir}/profile.d/cabal-install.sh
@@ -149,6 +149,9 @@ install -pm 644 -D -t %{buildroot}%{_sysconfdir}/profile.d/ %{SOURCE2}
 
 
 %changelog
+* Tue Jul 29 2025 Jens Petersen <petersen@redhat.com> - 3.16.0.0-1
+- https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.16.0.0.md
+
 * Mon Jul 28 2025 Jens Petersen <petersen@redhat.com> - 3.14.2.0-1
 - https://github.com/haskell/cabal/blob/master/release-notes/cabal-install-3.14.2.0.md
 
